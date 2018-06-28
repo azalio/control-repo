@@ -1,2 +1,18 @@
 ---
 message: "This node is using common data"
+
+ntp:
+  servers: [ 'infra1.local' ]
+
+mysql::client::package_name: "mysql-community-client" # required for proper MySQL installation
+mysql::server::package_name: "mysql-community-server" # required for proper MySQL installation
+mysql::server::package_ensure: 'installed' # do not specify version here, unfortunately yum fails with error that package is already installed
+mysql::server::root_password: "change_me_i_am_insecure"
+mysql::server::manage_config_file: true
+mysql::server::service_name: 'mysqld' # required for puppet module
+mysql::server::override_options:
+  'mysqld':
+    'bind-address': '127.0.0.1'
+    'log-error': '/var/log/mysqld.log' # required for proper MySQL installation
+  'mysqld_safe':
+    'log-error': '/var/log/mysqld.log'  # required for proper MySQL installation
