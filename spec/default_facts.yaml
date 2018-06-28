@@ -1,8 +1,8 @@
 ---
   architecture: x86_64
   ipaddress: 127.0.0.1
-  domain: iddc
-  site: iddc
+  domain: localdomain
+  site: localsite
   os:
     name: 'CentOS'
     family: 'RedHat'
