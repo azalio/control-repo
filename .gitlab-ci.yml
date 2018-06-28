@@ -1,0 +1,65 @@
+---
+# -*- coding: utf-8 -*-
+
+# Trying to fix Cannot connect to the Docker daemon
+# https://gitlab.com/gitlab-org/gitlab-runner/issues/2408
+# added retry param
+
+.bundle_install: &bundle_install
+  - "source /etc/profile"
+  - "flock -x /var/cache/bundle/.lock bundle install --path /var/cache/bundle --quiet"
+
+
+stages:
+  - test
+  - hosts_test
+
+.rspec_hosts: &rspec_hosts
+  stage: hosts_test
+  before_script: *bundle_install
+  tags:
+    - puppet
+
+puppet-syntax:
+  stage: test
+  before_script: *bundle_install
+  retry: 2
+  tags:
+    - puppet
+  except:
+    - master
+  script:
+    - 'bundle exec puppet parser validate modules/'
+    - 'bundle exec puppet parser validate manifests/'
+
+erb-syntax:
+  stage: test
+  retry: 2
+  tags:
+    - puppet
+  except:
+    - master
+  script:
+    - "find modules/ -type f -name '*erb' -print0 | xargs -0 -I {} sh -c 'echo {}; erb -P -x -T '-' {} | ruby -c || exit 255'"
+
+puppet-classes_defines:
+  stage: test
+  before_script: *bundle_install
+  retry: 2
+  except:
+    - master
+  tags:
+    - puppet
+  script:
+    - "bundle exec rspec spec/classes/"
+  coverage: '/Resource coverage: \d+\.\d+/'
+
+hosts:
+  <<: *rspec_hosts
+  script:
+    - "bundle exec parallel_rspec spec/hosts"
+  retry: 2
+  except:
+    - master
+
+# vim: set et ci ts=2 sw=2:
