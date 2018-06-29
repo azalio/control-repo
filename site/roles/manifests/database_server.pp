@@ -1,4 +1,4 @@
-class role::database_server {
+class roles::database_server {
 
   include profiles::base
   include profiles::mysql

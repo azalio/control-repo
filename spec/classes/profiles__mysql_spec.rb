@@ -2,12 +2,6 @@ require 'spec_helper'
 
 describe 'profiles::mysql' do
   let(:node) { 'this.is.only.used.for.unit.tests' }
-#  let(:params) do
-#    {
-#        override_options:  'some options',
-#    }
-#  end
-
   it do
       is_expected.to contain_class('mysql::server').with(
           root_password: 'change_me_i_am_insecure',

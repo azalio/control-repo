@@ -5,11 +5,11 @@
 File { backup => false }
 
 node webserver.local {
-  include role::webserver
+  include roles::webserver
 }
 
 node database.local {
-  include role::database_server
+  include roles::database_server
 }
 
 node this.is.only.used.for.unit.tests { }

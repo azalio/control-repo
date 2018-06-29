@@ -14,6 +14,6 @@ describe 'webserver.local' do
   it { is_expected.to compile.with_all_deps }
 
   it do
-    is_expected.to contain_class('role::webserver')
+    is_expected.to contain_class('roles::webserver')
   end
 end
