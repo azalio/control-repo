@@ -12,12 +12,12 @@ bundle install
 bundle exec rspec spec/hosts/ spec/classes/
 ```
 
-== Ниже описание как это все работает.  
+==Ниже описание как это все работает.  
 
 - Репозиторий склонирован с каноничного https://github.com/puppetlabs/control-repo
 - Для тестов используется https://github.com/rodjek/rspec-puppet
 
-=== Важные файлы:
+===Важные файлы:
 - `Puppetfile` - файл, в котором вы указываете какие puppet модули подключать.
 - `Gemfile` - какие gem использовать.
 - `spec/spec_helper.rb` - основа всех тестов. Самое главное - пути, если их настроить не правильно, ничего работать не будет:
