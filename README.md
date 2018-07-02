@@ -2,9 +2,8 @@
 
 Чтобы попробовать, вам надо выполнить следующие команды находясь в корне этого репозитория:  
 ```
-gem install r10k
-r10k puppetfile install
 bundle install
+bundle exec r10k puppetfile install
 ```
 
 Чтобы проверить что у вас работают тесты, вам надо запустить команду:  

@@ -25,6 +25,7 @@ gem 'puppet-lint', :git => 'https://github.com/rodjek/puppet-lint.git', :require
 gem 'puppet-retrospec', :require => false
 gem 'parallel_tests', :require => false
 gem 'rspec-puppet', :require => false
+gem 'r10k', '~> 2.3'
 
 if ENV['COVERAGE'] == 'yes'
   gem 'coveralls', :require => false
